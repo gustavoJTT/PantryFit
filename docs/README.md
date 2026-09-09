@@ -1,22 +1,20 @@
 # Documentation Index
 
-This folder centralizes the available project documentation by language.
+This folder centralizes the project documentation by language and document type.
 
 ## Main project READMEs
 
 - [English README](../README.md)
 - [Portuguese README](../README.pt-BR.md)
 
-## English documentation
+## English
 
-- [System overview](en/README.md)
+- [Vision document](en/VISION.md)
+- [Documentation page](en/README.md)
 - [Glossary](en/GLOSSARY.md)
 
-## Documentação em português
+## Português
 
-- [Visão geral do sistema](pt-BR/README.md)
+- [Documento de visão](pt-BR/VISAO.md)
+- [Página de documentação](pt-BR/README.md)
 - [Glossário](pt-BR/GLOSSARIO.md)
-
-## Project root
-
-- [Repository root](../)

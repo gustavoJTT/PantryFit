@@ -1,14 +1,14 @@
-# PantryFit Documentation
+# PantryFit Documentation in English
 
-This folder contains the project documentation in English.
+This folder contains the English documentation for the project.
 
-## Main files
+## Main documents
 
-- [Documentation index](../README.md): navigation page for all language versions.
-- [System overview and requirements](../../README.md): main project documentation in English.
-- [Portuguese overview](../../README.pt-BR.md): main project documentation in Portuguese.
-- [Glossary](GLOSSARY.md): glossary of domain terms.
+- [Vision document](VISION.md): system purpose, scope, stakeholders, architecture, users, requirements, and interfaces.
+- [Glossary](GLOSSARY.md): definitions of the main domain terms.
+- [Documentation index](../README.md): navigation for all project documentation.
 
-## Project purpose
+## Other language
 
-PantryFit integrates pantry inventory management with meal tracking and nutritional analysis.
+- [Portuguese vision document](../pt-BR/VISAO.md)
+- [Portuguese glossary](../pt-BR/GLOSSARIO.md)
