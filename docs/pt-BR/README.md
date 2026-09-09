@@ -1,14 +1,14 @@
-# Documentação do PantryFit
+# Documentação do PantryFit em Português
 
 Esta pasta contém a documentação do projeto em português.
 
-## Arquivos principais
+## Documentos principais
 
-- [Índice da documentação](../README.md): página de navegação para todas as versões por idioma.
-- [Visão geral e requisitos do sistema](../../README.pt-BR.md): documentação principal do projeto em português.
-- [English overview](../../README.md): documentação principal do projeto em inglês.
-- [Glossário](GLOSSARIO.md): glossário dos termos do domínio.
+- [Documento de visão](VISAO.md): objetivo, escopo, stakeholders, arquitetura, usuários, requisitos e interfaces do sistema.
+- [Glossário](GLOSSARIO.md): definição dos principais termos do domínio.
+- [Índice da documentação](../README.md): navegação por todos os documentos do projeto.
 
-## Objetivo do projeto
+## Outro idioma
 
-O PantryFit integra o controle de estoque do pantry com o registro de refeições e a análise nutricional.
+- [English vision document](../en/VISION.md)
+- [English glossary](../en/GLOSSARY.md)
