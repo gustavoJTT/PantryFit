@@ -2,8 +2,8 @@
 
 > System for meal management, nutritional tracking, and pantry inventory management.
 
-[![Java](https://img.shields.io/badge/Java-17%2B-orange.svg)](https://www.oracle.com/java/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-green.svg)](https://spring.io/projects/spring-boot)
+[![Java](https://img.shields.io/badge/Java-21%2B-orange.svg)](https://www.oracle.com/java/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.1-green.svg)](https://spring.io/projects/spring-boot)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15%2B-blue.svg)](https://www.postgresql.org/)
 [![Docker](https://img.shields.io/badge/Docker-Enabled-blue.svg)](https://www.docker.com/)
 
@@ -27,8 +27,8 @@ PantryFit is also an academic and portfolio project focused on software engineer
 
 ## Technology stack
 
-- Java 17+
-- Spring Boot 3.x
+- Java 21+
+- Spring Boot 4.1.1
 - Maven
 - PostgreSQL
 - Docker and Docker Compose
@@ -50,7 +50,7 @@ The project is in the early stages of development. The documentation, backend st
 
 Requirements:
 
-- Java 17 or later;
+- Java 21 or later;
 - Maven or the Maven Wrapper;
 - Docker and Docker Compose.
 

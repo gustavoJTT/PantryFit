@@ -93,7 +93,7 @@ src/
 │   │   ├── controller/     # Endpoints e APIs REST
 │   │   ├── service/        # Regras de negócio
 │   │   ├── repository/     # Acesso a dados
-│   │   ├── model/          # Entidades do domínio
+│   │   ├── entity/         # Entidades JPA do domínio
 │   │   ├── dto/            # Objetos de transferência de dados
 │   │   └── exception/      # Tratamento de erros
 │   │
