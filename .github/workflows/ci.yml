@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_DB: pantryfit
+          POSTGRES_USER: pantryfit
+          POSTGRES_PASSWORD: pantryfit
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U pantryfit -d pantryfit"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Run tests and package
+        run: ./mvnw --batch-mode --no-transfer-progress verify
+        env:
+          SPRING_PROFILES_ACTIVE: test
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/pantryfit
+          SPRING_DATASOURCE_USERNAME: pantryfit
+          SPRING_DATASOURCE_PASSWORD: pantryfit
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: target/surefire-reports/
+          if-no-files-found: ignore
