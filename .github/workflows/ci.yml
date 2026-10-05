@@ -3,8 +3,6 @@ name: CI
 on:
   pull_request:
   push:
-    branches:
-      - main
 
 jobs:
   build-and-test:
@@ -36,7 +34,7 @@ jobs:
           java-version: '21'
           cache: maven
 
-      - name: Run tests and package
+      - name: Detect deprecated code, run tests and package
         run: ./mvnw --batch-mode --no-transfer-progress verify
         env:
           SPRING_PROFILES_ACTIVE: test
