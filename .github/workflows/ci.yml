@@ -64,8 +64,17 @@ jobs:
           java-version: '21'
           cache: maven
 
+      - name: Cache OWASP NVD data
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository/org/owasp/dependency-check-data
+          key: dependency-check-nvd-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: dependency-check-nvd-
+
       - name: OWASP Dependency-Check
         run: ./mvnw --batch-mode --no-transfer-progress org.owasp:dependency-check-maven:12.1.0:check
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
 
       - name: Upload dependency-check reports
         if: always()

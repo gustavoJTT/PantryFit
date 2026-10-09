@@ -29,6 +29,8 @@
 	<properties>
 		<java.version>21</java.version>
 		<lombok.version>1.18.48</lombok.version>
+		<tomcat.version>11.0.26</tomcat.version>
+		<hibernate-validator.version>9.1.4.Final</hibernate-validator.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -44,12 +46,6 @@
 			<artifactId>spring-boot-starter-webmvc</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -88,6 +84,7 @@
 				<artifactId>dependency-check-maven</artifactId>
 				<version>12.1.0</version>
 				<configuration>
+					<nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
 					<failBuildOnCVSS>7</failBuildOnCVSS>
 					<failOnError>true</failOnError>
 					<skipTestScope>true</skipTestScope>
