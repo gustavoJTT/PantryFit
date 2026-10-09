@@ -31,6 +31,7 @@
 		<lombok.version>1.18.48</lombok.version>
 		<tomcat.version>11.0.26</tomcat.version>
 		<hibernate-validator.version>9.1.4.Final</hibernate-validator.version>
+		<dependency-check.version>12.2.2</dependency-check.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -82,7 +83,7 @@
 			<plugin>
 				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>
-				<version>12.1.0</version>
+				<version>${dependency-check.version}</version>
 				<configuration>
 					<nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
 					<failBuildOnCVSS>7</failBuildOnCVSS>
