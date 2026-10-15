@@ -178,21 +178,73 @@ Integration between the inventory and meals must ensure that the consumption of 
 
 ### Quality requirements
 
-- QR01: the application must be easy to maintain and evolve;
-- QR02: the code must follow good organization and architecture practices;
-- QR03: the system must maintain data integrity in critical operations;
-- QR04: the application must respond quickly in common operations;
-- QR05: the system must be testable through automated tests;
-- QR06: the solution must be compatible with development and testing environments via Docker.
+The following requirements were defined based on the quality characteristics of
+ISO/IEC 25010 that apply to the current scope. Each requirement includes an
+acceptance criterion and a measurement or operationalization method.
+
+- QR01 - Functional suitability: the system must implement the flows specified
+    in functional requirements FR01 to FR12, including nutritional calculations
+    and the stock deduction associated with consumption. It will be measured
+    quantitatively through acceptance tests, with 100% of the specified scenarios
+    passing. Calculated nutritional values must differ by no more than 0.01 from
+    the expected result, respecting the registered unit of measure.
+- QR02 - Performance efficiency: common registration, consultation, and
+    consumption operations must have a response time of up to 2 seconds at the
+    95th percentile, with up to 20 simultaneous requests. It will be measured by
+    load tests in a reference environment, recording latency, error rate, and
+    throughput.
+- QR03 - Reliability: a consumption operation must be atomic, so a failure
+    cannot leave a meal registered without the corresponding stock deduction, or
+    vice versa. It will be operationalized through database transactions and
+    failure tests, with 100% of invalid scenarios resulting in rollback and never
+    allowing negative stock.
+- QR04 - Usability and operability: endpoints must use consistent names and
+    formats, return appropriate HTTP status codes, and report validation errors in
+    JSON. It will be evaluated qualitatively through an endpoint checklist covering
+    error messages, naming, and registration flow, with 100% of the checklist items
+    passing quantitatively.
+- QR05 - Security: data received by the API must be validated, and dependencies
+    must be checked for known vulnerabilities. It will be operationalized through
+    Bean Validation, tests for invalid input, and OWASP Dependency-Check; the
+    build must not accept vulnerabilities with a CVSS score equal to or greater
+    than 7.
+- QR06 - Maintainability: the code must remain organized into presentation,
+    service, persistence, and domain layers, with separated responsibilities and
+    low coupling. It will be verified through code review and package structure,
+    together with automated tests for business rules; each new feature must
+    include tests for its main and error scenarios.
+- QR07 - Compatibility: the application must work with Java 21, Spring Boot,
+    and PostgreSQL defined for the project, while maintaining communication over
+    HTTP and JSON. It will be measured by the successful execution of `./mvnw
+    test` and integration tests with PostgreSQL in the reference environment.
+- QR08 - Portability: the development and testing environment must be
+    reproducible through documented configuration, preferably with Docker and
+    Docker Compose. It will be measured by creating the environment on a clean
+    machine and successfully running the application and test suite without manual
+    code changes.
 
 ### Constraints
 
-- C01: the system will be implemented in Java with Spring Boot;
-- C02: the main database will be PostgreSQL;
-- C03: the project must follow a layered backend organization;
-- C04: the execution environment can be configured with Docker and Docker Compose;
-- C05: the initial solution prioritizes the application and persistence layers, without focusing on a complex frontend;
-- C06: the application must respect integrity rules to avoid inconsistencies in stock and consumption.
+- C01: the implementation must use Java 21 and Spring Boot, according to the
+    project configuration and dependencies defined in `pom.xml`.
+- C02: the main relational database must be PostgreSQL; using another DBMS
+    requires explicit adaptation of the persistence configuration and tests.
+- C03: the backend must maintain separation between the presentation, service,
+    persistence, and domain layers, avoiding business rules implemented directly
+    in controllers or repositories.
+- C04: external communication must occur through an HTTP API, using JSON as the
+    standard input and output format.
+- C05: operations that change stock, meals, and their relationships must comply
+    with database integrity constraints and run transactionally.
+- C06: the initial solution must prioritize the backend, persistence, and
+    business rules; complex frontend, authentication, authorization, and external
+    integrations are outside the initial scope.
+- C07: the development and testing environment must be reproducible through
+    Docker and Docker Compose, when those files are provided, without changing
+    the application's business rules.
+- C08: new features must preserve compatibility with the functional
+    requirements, API contracts, and persisted data, unless an approved migration
+    is documented.
 
 ## 3.3 Interfaces
 

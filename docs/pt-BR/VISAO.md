@@ -178,21 +178,76 @@ A integração entre o inventário e as refeições deve garantir que o consumo 
 
 ### Requisitos de qualidade
 
-- QR01: a aplicação deve ser fácil de manter e evoluir;
-- QR02: o código deve seguir boas práticas de organização e arquitetura;
-- QR03: o sistema deve manter a integridade dos dados em operações críticas;
-- QR04: a aplicação deve responder rapidamente nas operações mais comuns;
-- QR05: o sistema deve ser testável por meio de testes automatizados;
-- QR06: a solução deve ser compatível com ambientes de desenvolvimento e teste via Docker.
+Os requisitos abaixo foram definidos com base nas características de qualidade da
+ISO/IEC 25010 aplicáveis ao escopo atual. Cada requisito possui um critério de
+aceitação e uma forma de medição ou operacionalização.
+
+- QR01 - Adequação funcional: o sistema deve implementar os fluxos previstos nos
+    requisitos funcionais RF01 a RF12, incluindo o cálculo nutricional e a baixa de
+    estoque associada ao consumo. Será medido quantitativamente pela execução de
+    testes de aceitação, com aprovação de 100% dos cenários especificados. Os
+    valores nutricionais calculados devem apresentar diferença máxima de 0,01 em
+    relação ao resultado esperado, respeitando a unidade de medida cadastrada.
+- QR02 - Eficiência de desempenho: as operações comuns de cadastro, consulta e
+    registro de consumo devem apresentar tempo de resposta de até 2 segundos no
+    percentil 95, considerando até 20 requisições simultâneas. Será medido por
+    testes de carga em um ambiente de referência, registrando latência, taxa de
+    erro e vazão.
+- QR03 - Confiabilidade: uma operação de consumo deve ser atômica, de modo que
+    uma falha não possa deixar a refeição registrada sem a correspondente baixa no
+    estoque, ou vice-versa. Será operacionalizado com transações do banco de dados
+    e testes de falha, nos quais 100% dos cenários inválidos devem resultar em
+    rollback e nunca permitir estoque negativo.
+- QR04 - Usabilidade e operabilidade: os endpoints devem usar nomes e formatos
+    consistentes, retornar códigos HTTP adequados e informar erros de validação em
+    JSON. Será avaliado qualitativamente por uma lista de verificação dos
+    endpoints, cobrindo mensagens de erro, nomenclatura e fluxo de cadastro, e
+    quantitativamente pela aprovação de 100% dos itens dessa lista.
+- QR05 - Segurança: os dados recebidos pela API devem ser validados e as
+    dependências devem ser verificadas quanto a vulnerabilidades conhecidas. Será
+    operacionalizado com Bean Validation, testes para entradas inválidas e a
+    execução do OWASP Dependency-Check; a compilação não deve aceitar
+    vulnerabilidades com CVSS igual ou superior a 7.
+- QR06 - Manutenibilidade: o código deve permanecer organizado nas camadas de
+    apresentação, serviço, persistência e domínio, com responsabilidades
+    separadas e baixo acoplamento. Será verificado por revisão de código e pela
+    estrutura dos pacotes, além de testes automatizados para as regras de negócio;
+    cada funcionalidade nova deve incluir testes para seus cenários principais e
+    de erro.
+- QR07 - Compatibilidade: a aplicação deve funcionar com Java 21, Spring Boot e
+    PostgreSQL definidos para o projeto, mantendo a comunicação por HTTP e JSON.
+    Será medido pela execução bem-sucedida de `./mvnw test` e dos testes de
+    integração com PostgreSQL no ambiente de referência.
+- QR08 - Portabilidade: o ambiente de desenvolvimento e teste deve poder ser
+    reproduzido por configuração documentada, preferencialmente com Docker e
+    Docker Compose. Será medido pela criação do ambiente em uma máquina limpa e
+    pela execução bem-sucedida da aplicação e da suíte de testes sem alterações
+    manuais no código.
 
 ### Restrições
 
-- R01: o sistema será implementado em Java com Spring Boot;
-- R02: o banco de dados principal será PostgreSQL;
-- R03: o projeto deve seguir uma organização em camadas do backend;
-- R04: o ambiente de execução pode ser configurado com Docker e Docker Compose;
-- R05: a solução inicial prioriza as camadas de aplicação e persistência, sem foco em frontend complexo;
-- R06: a aplicação deve respeitar regras de integridade para evitar inconsistências em estoque e consumo.
+- R01: a implementação deve utilizar Java 21 e Spring Boot, conforme a
+    configuração do projeto e as dependências definidas no `pom.xml`.
+- R02: o banco de dados relacional principal deve ser PostgreSQL; o uso de outro
+    SGBD depende de adaptação explícita da configuração e dos testes de
+    persistência.
+- R03: o backend deve manter separação entre as camadas de apresentação,
+    serviço, persistência e domínio, evitando que regras de negócio sejam
+    implementadas diretamente nos controladores ou repositórios.
+- R04: a comunicação externa deve ocorrer por API HTTP, usando JSON como formato
+    padrão de entrada e saída.
+- R05: as operações que alteram estoque, refeições e seus relacionamentos devem
+    respeitar as restrições de integridade do banco e ser executadas de forma
+    transacional.
+- R06: a solução inicial deve priorizar backend, persistência e regras de
+    negócio; frontend complexo, autenticação, autorização e integrações externas
+    ficam fora do escopo inicial.
+- R07: o ambiente de desenvolvimento e teste deve ser reproduzível por Docker e
+    Docker Compose, quando esses arquivos forem disponibilizados, sem alterar as
+    regras de negócio da aplicação.
+- R08: novas funcionalidades devem preservar compatibilidade com os requisitos
+    funcionais, os contratos da API e os dados já persistidos, salvo quando uma
+    migração documentada for aprovada.
 
 ## 3.3 Interfaces
 
