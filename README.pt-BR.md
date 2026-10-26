@@ -60,6 +60,15 @@ Execute a aplicação localmente com:
 ./mvnw spring-boot:run
 ```
 
+Verifique o padrão de codificação Java usando as regras do Google Java Style:
+
+```bash
+./mvnw checkstyle:check
+```
+
+A mesma verificação é executada automaticamente durante `./mvnw verify` e no
+pipeline de CI.
+
 ## Licença
 
 A licença do projeto ainda não foi definida.

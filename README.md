@@ -60,6 +60,15 @@ Run the application locally with:
 ./mvnw spring-boot:run
 ```
 
+Check the Java coding style with the Google Java Style rules:
+
+```bash
+./mvnw checkstyle:check
+```
+
+The same check runs automatically during `./mvnw verify` and in the CI
+pipeline.
+
 ## License
 
 The project license has not been defined yet.
