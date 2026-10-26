@@ -37,6 +37,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Meal> meals = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PantryItem> pantryItems = new ArrayList<>();
+
     protected User() {
     }
 
@@ -75,6 +78,16 @@ public class User {
         meal.setUser(null);
     }
 
+    public void addPantryItem(PantryItem pantryItem) {
+        pantryItems.add(pantryItem);
+        pantryItem.setUser(this);
+    }
+
+    public void removePantryItem(PantryItem pantryItem) {
+        pantryItems.remove(pantryItem);
+        pantryItem.setUser(null);
+    }
+
     public Long getId() {
         return id;
     }
@@ -109,5 +122,9 @@ public class User {
 
     public List<Meal> getMeals() {
         return meals;
+    }
+
+    public List<PantryItem> getPantryItems() {
+        return pantryItems;
     }
 }
