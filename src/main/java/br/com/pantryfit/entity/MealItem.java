@@ -23,6 +23,10 @@ public class MealItem {
     @JoinColumn(name = "meal_id", nullable = false)
     private Meal meal;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pantry_item_id")
+    private PantryItem pantryItem;
+
     @Column(nullable = false)
     private String name;
 
@@ -75,6 +79,14 @@ public class MealItem {
 
     public void setMeal(Meal meal) {
         this.meal = meal;
+    }
+
+    public PantryItem getPantryItem() {
+        return pantryItem;
+    }
+
+    public void setPantryItem(PantryItem pantryItem) {
+        this.pantryItem = pantryItem;
     }
 
     public String getName() {
