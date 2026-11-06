@@ -98,6 +98,7 @@
 					<includeTestSourceDirectory>true</includeTestSourceDirectory>
 					<failOnViolation>true</failOnViolation>
 					<failsOnError>true</failsOnError>
+					<violationSeverity>warning</violationSeverity>
 				</configuration>
 			</plugin>
 			<plugin>
